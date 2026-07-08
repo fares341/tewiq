@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ArrowLeft, Cpu } from "lucide-react";
+import { Menu, X, ArrowLeft, Cpu } from "./Icons";
 import { UserType } from "../types";
 import Logo from "./Logo";
 
@@ -13,10 +13,20 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // Completely disable scroll listeners on mobile/tablet viewports to prevent GPU lag and memory leaks
+    const isMobileViewport = window.innerWidth < 1024 || (navigator && navigator.maxTouchPoints > 0);
+    if (isMobileViewport) {
+      setScrolled(true);
+      return;
+    }
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -45,7 +55,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "py-4 bg-[#050816]/80 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-purple-900/10"
+            ? "py-4 bg-[#050816]/95 border-b border-white/5 shadow-2xl shadow-purple-900/10 lg:bg-[#050816]/80 lg:backdrop-blur-xl"
             : "py-6 bg-transparent"
         }`}
       >

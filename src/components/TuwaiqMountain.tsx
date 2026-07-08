@@ -36,42 +36,44 @@ export default function TuwaiqMountain() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-purple-950/25 bg-[#050816] group cursor-pointer transition-all duration-500 hover:border-purple-500/30"
+      className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-purple-950/25 bg-[#050816] group cursor-pointer transition-all duration-500 lg:hover:border-purple-500/30"
     >
-      {/* 1. Dramatic Sunset & Nebula Ambient Glow (Deep behind) */}
-      <div 
-        className="absolute inset-[-10%] rounded-full blur-[100px] pointer-events-none opacity-40 mix-blend-screen transition-transform duration-700 ease-out"
-        style={{
-          background: "radial-gradient(circle at 60% 70%, #ff6a3d 0%, #7C5CFF 45%, transparent 70%)",
-          transform: isMobile 
-            ? "scale(1)" 
-            : `translate(calc(${mousePos.x * 25}px), calc(${mousePos.y * 25}px)) scale(1.05)`,
-        }}
-      ></div>
+      {/* 1. Dramatic Sunset & Nebula Ambient Glow (Deep behind) - Completely Disabled on Mobile */}
+      {!isMobile && (
+        <>
+          <div 
+            className="absolute inset-[-10%] rounded-full lg:blur-[100px] md:blur-[60px] blur-[35px] pointer-events-none opacity-40 mix-blend-screen transition-transform duration-700 ease-out"
+            style={{
+              background: "radial-gradient(circle at 60% 70%, #ff6a3d 0%, #7C5CFF 45%, transparent 70%)",
+              transform: `translate(calc(${mousePos.x * 25}px), calc(${mousePos.y * 25}px)) scale(1.05)`,
+            }}
+          ></div>
 
-      <div 
-        className="absolute inset-[-10%] rounded-full blur-[80px] pointer-events-none opacity-25 mix-blend-screen transition-transform duration-700 ease-out"
-        style={{
-          background: "radial-gradient(circle at 20% 30%, #3B82F6 0%, transparent 60%)",
-          transform: isMobile 
-            ? "scale(1)" 
-            : `translate(calc(${mousePos.x * -15}px), calc(${mousePos.y * -15}px)) scale(1.05)`,
-        }}
-      ></div>
+          <div 
+            className="absolute inset-[-10%] rounded-full lg:blur-[80px] md:blur-[50px] blur-[25px] pointer-events-none opacity-25 mix-blend-screen transition-transform duration-700 ease-out"
+            style={{
+              background: "radial-gradient(circle at 20% 30%, #3B82F6 0%, transparent 60%)",
+              transform: `translate(calc(${mousePos.x * -15}px), calc(${mousePos.y * -15}px)) scale(1.05)`,
+            }}
+          ></div>
+        </>
+      )}
 
-      {/* 2. Shimmering Loading Skeleton State */}
+      {/* 2. Shimmering Loading Skeleton State - Highly optimized for mobile */}
       {!imageLoaded && (
         <div 
-          className="absolute inset-0 bg-[#070b1e] flex flex-col items-center justify-center z-20 transition-opacity duration-500"
+          className="absolute inset-0 bg-[#070b1e] flex flex-col items-center justify-center z-20 transition-opacity duration-300"
         >
-          {/* Pulsing loading design matching the branding */}
-          <div className="relative flex items-center justify-center">
-            <div className="absolute w-20 h-20 rounded-full border border-purple-500/20 animate-ping"></div>
-            <div className="w-16 h-16 rounded-full border border-cyan-500/30 border-t-cyan-400 animate-spin"></div>
-          </div>
-          <span className="font-sans text-xs text-[#AEB7CC] mt-6 tracking-widest uppercase animate-pulse">
-            جاري تحميل جبل طويق...
-          </span>
+          {isMobile ? (
+            <span className="font-sans text-xs text-[#AEB7CC] tracking-widest uppercase">
+              جاري التحميل...
+            </span>
+          ) : (
+            <div className="relative flex items-center justify-center">
+              <div className="absolute w-20 h-20 rounded-full border border-purple-500/20 animate-ping"></div>
+              <div className="w-16 h-16 rounded-full border border-cyan-500/30 border-t-cyan-400 animate-spin"></div>
+            </div>
+          )}
         </div>
       )}
 
@@ -85,8 +87,8 @@ export default function TuwaiqMountain() {
           e.currentTarget.onerror = null;
           e.currentTarget.src = "https://i.ibb.co/dsbqXrRD/Chat-GPT-Image-Jul-7-2026-03-28-50-AM.png";
         }}
-        className={`w-full h-full object-cover select-none pointer-events-none transition-all duration-700 ease-out group-hover:scale-[1.05] ${
-          imageLoaded ? "opacity-100 scale-[1.02]" : "opacity-0 scale-[1.08]"
+        className={`w-full h-full object-cover select-none pointer-events-none transition-all duration-500 ${
+          imageLoaded ? "opacity-100 scale-100" : "opacity-0 scale-[1.03]"
         }`}
         style={{
           transform: isMobile 

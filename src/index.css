@@ -33,10 +33,16 @@
 
 /* Glassmorphism utility classes */
 .glass-panel {
-  background: rgba(18, 24, 40, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(11, 15, 26, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 1024px) {
+  .glass-panel {
+    background: rgba(18, 24, 40, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
 }
 
 .glass-panel-hover {
@@ -93,4 +99,26 @@
 .energy-line {
   animation: pulse-energy 3s infinite ease-in-out;
 }
+
+/* Force disable and remove background videos completely on mobile < 768px */
+@media (max-width: 767px) {
+  video, 
+  video.mobile-hide-video,
+  .mobile-hide-video {
+    display: none !important;
+    visibility: hidden !important;
+    content: none !important;
+    pointer-events: none !important;
+  }
+  
+  /* Lightweight static background fallback for mobile */
+  .mobile-static-bg {
+    background-image: url("https://i.ibb.co/dsbqXrRD/Chat-GPT-Image-Jul-7-2026-03-28-50-AM.png") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    opacity: 0.05 !important;
+  }
+}
+
 

@@ -29,7 +29,7 @@ import {
   ArrowRight,
   Globe,
   Sparkle
-} from "lucide-react";
+} from "./components/Icons";
 import Navbar from "./components/Navbar";
 import Logo from "./components/Logo";
 import TuwaiqMountain from "./components/TuwaiqMountain";
@@ -69,6 +69,21 @@ export default function App() {
   const [selectedService, setSelectedService] = useState<string>("");
   const [openFaq, setOpenFaq] = useState<string | null>("faq-1");
   const [selectedVideo, setSelectedVideo] = useState<VideoCard | null>(null);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth < 1024 || (navigator && navigator.maxTouchPoints > 0);
+  });
+
+  // Detect mobile viewports to completely disable heavy GPU animations/blurs
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024 || (navigator && navigator.maxTouchPoints > 0));
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Contact Form States
   const [formData, setFormData] = useState<ContactFormData>({
@@ -183,12 +198,38 @@ export default function App() {
   const currentVideos = visibleTab === "individuals" ? INDIVIDUAL_VIDEOS : COMPANY_VIDEOS;
 
   return (
-    <div className="relative min-h-screen bg-[#050816] text-white selection:bg-[#7C5CFF]/30 selection:text-white overflow-x-hidden">
+    <div 
+      className="relative min-h-screen bg-[#050816] text-white selection:bg-[#7C5CFF]/30 selection:text-white overflow-x-hidden"
+      style={isMobile ? { backgroundImage: "linear-gradient(180deg, #050816 0%, #0c0a22 50%, #050816 100%)" } : undefined}
+    >
       
-      {/* Dynamic Background Accents */}
-      <div className="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#7C5CFF]/10 blur-[150px] pointer-events-none"></div>
-      <div className="absolute top-[30%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-[#5B5CFF]/5 blur-[180px] pointer-events-none"></div>
-      <div className="absolute bottom-[10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-[#3B82F6]/5 blur-[160px] pointer-events-none"></div>
+      {/* Premium Ambient Background Video - Desktop Only, completely disabled/removed from DOM on Mobile to prevent crashes & lag */}
+      {!isMobile ? (
+        <div className="hidden md:block absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="mobile-hide-video absolute top-0 left-0 w-full h-full object-cover opacity-[0.03]"
+          >
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-numbers-31934-large.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050816]/30 via-[#050816]/70 to-[#050816]"></div>
+        </div>
+      ) : (
+        /* Lightweight static fallback background style for mobile */
+        <div className="absolute inset-0 w-full h-full pointer-events-none z-0 mobile-static-bg"></div>
+      )}
+      
+      {/* Dynamic Background Accents - completely disabled on mobile for instantaneous loading */}
+      {!isMobile && (
+        <div className="hidden lg:block">
+          <div className="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#7C5CFF]/10 lg:blur-[150px] md:blur-[100px] blur-[60px] pointer-events-none"></div>
+          <div className="absolute top-[30%] left-[-15%] w-[60vw] h-[60vw] rounded-full bg-[#5B5CFF]/5 lg:blur-[180px] md:blur-[120px] blur-[70px] pointer-events-none"></div>
+          <div className="absolute bottom-[10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-[#3B82F6]/5 lg:blur-[160px] md:blur-[100px] blur-[60px] pointer-events-none"></div>
+        </div>
+      )}
 
       {/* Global Interactive Elements: Video Preview Modal */}
       {selectedVideo && (() => {
@@ -539,7 +580,7 @@ export default function App() {
 
                       {/* Video tag badge */}
                       <div className="absolute top-4 right-4">
-                        <span className="bg-[#050816]/75 backdrop-blur-md text-xs font-sans text-white border border-white/10 px-2.5 py-1 rounded-lg">
+                        <span className="bg-[#050816]/90 border border-white/10 px-2.5 py-1 rounded-lg text-xs font-sans text-white lg:bg-[#050816]/75 lg:backdrop-blur-md">
                           {video.tag}
                         </span>
                       </div>
@@ -583,8 +624,12 @@ export default function App() {
           
           {/* Glass layout box resembling Stripe premium forms */}
           <div className="relative rounded-3xl overflow-hidden glass-panel border border-white/5 p-8 md:p-12 shadow-2xl shadow-purple-950/20 bg-gradient-to-br from-[#0B1120]/90 to-[#121828]/60">
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#7C5CFF]/5 rounded-full blur-[80px] pointer-events-none"></div>
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#3B82F6]/5 rounded-full blur-[80px] pointer-events-none"></div>
+            {!isMobile && (
+              <>
+                <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#7C5CFF]/5 rounded-full blur-[80px] pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#3B82F6]/5 rounded-full blur-[80px] pointer-events-none"></div>
+              </>
+            )}
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
               
