@@ -82,6 +82,7 @@ export default function TuwaiqMountain() {
         referrerPolicy="no-referrer"
         onLoad={() => setImageLoaded(true)}
         onError={(e) => {
+          e.currentTarget.onerror = null;
           e.currentTarget.src = "https://i.ibb.co/dsbqXrRD/Chat-GPT-Image-Jul-7-2026-03-28-50-AM.png";
         }}
         className={`w-full h-full object-cover select-none pointer-events-none transition-all duration-700 ease-out group-hover:scale-[1.05] ${

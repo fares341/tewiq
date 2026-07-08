@@ -10,6 +10,7 @@ export default function Logo({ className = "w-10 h-10", showText = true, textCla
         referrerPolicy="no-referrer"
         className={`${className} object-contain transition-all duration-300 hover:scale-105`}
         onError={(e) => {
+          e.currentTarget.onerror = null;
           e.currentTarget.src = "https://i.ibb.co/F4C3GMcP/Chat-GPT-Image-Jun-29-2026-04-37-56-AM.png";
         }}
         {...props}

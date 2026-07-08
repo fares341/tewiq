@@ -231,6 +231,7 @@ export default function App() {
                       src={selectedVideo.thumbnailUrl} 
                       alt={selectedVideo.title} 
                       onError={(e) => {
+                        e.currentTarget.onerror = null;
                         const fallbacks: Record<string, string> = {
                           "/images/ind-vid-1.webp": "https://i.ibb.co/nvK2snn/Chat-GPT-Image-Jul-7-2026-07-18-28-AM.png",
                           "/images/ind-vid-2.webp": "https://i.ibb.co/4Z99qYNP/Chat-GPT-Image-Jul-7-2026-07-20-28-AM.png",
@@ -525,6 +526,7 @@ export default function App() {
                         loading="lazy"
                         decoding="async"
                         onError={(e) => {
+                          e.currentTarget.onerror = null;
                           const fallbacks: Record<string, string> = {
                             "/images/ind-vid-1.webp": "https://i.ibb.co/nvK2snn/Chat-GPT-Image-Jul-7-2026-07-18-28-AM.png",
                             "/images/ind-vid-2.webp": "https://i.ibb.co/4Z99qYNP/Chat-GPT-Image-Jul-7-2026-07-20-28-AM.png",
