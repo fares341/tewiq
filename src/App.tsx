@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent, lazy, Suspense } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { 
   Sparkles, 
   Video, 
@@ -32,8 +32,7 @@ import {
 } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Logo from "./components/Logo";
-
-const TuwaiqMountain = lazy(() => import("./components/TuwaiqMountain"));
+import TuwaiqMountain from "./components/TuwaiqMountain";
 import { INDIVIDUAL_SERVICES, COMPANY_SERVICES, INDIVIDUAL_VIDEOS, COMPANY_VIDEOS, FAQS } from "./data";
 import { UserType, ContactFormData, Service, VideoCard } from "./types";
 
@@ -379,13 +378,7 @@ export default function App() {
 
             {/* Right Side: Iconic 3D Tuwaiq Mountain */}
             <div className="lg:col-span-5 relative w-full flex justify-center items-center">
-              <Suspense fallback={
-                <div className="relative w-full aspect-[4/3] rounded-3xl bg-[#050816] border border-white/10 flex items-center justify-center">
-                  <div className="w-10 h-10 rounded-full border border-cyan-500/30 border-t-cyan-400 animate-spin"></div>
-                </div>
-              }>
-                <TuwaiqMountain />
-              </Suspense>
+              <TuwaiqMountain />
             </div>
 
           </div>
