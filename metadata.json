@@ -1,0 +1,6 @@
+{
+  "name": "طويق لخدمات الذكاء الاصطناعي",
+  "description": "موقع تعريفي فاخر وحلول أتمتة الذكاء الاصطناعي لمنصة طويق لخدمات الذكاء الاصطناعي المستوحاة من جبل طويق العريق",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

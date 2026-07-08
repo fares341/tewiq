@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Tajawal", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    background-color: #050816;
+    color: #FFFFFF;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    direction: rtl;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom glow effects and scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 92, 255, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 92, 255, 0.4);
+}
+
+/* Glassmorphism utility classes */
+.glass-panel {
+  background: rgba(18, 24, 40, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(91, 92, 255, 0.3);
+  box-shadow: 0 0 30px rgba(91, 92, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Custom glow borders */
+@keyframes border-glow {
+  0%, 100% {
+    border-color: rgba(124, 92, 255, 0.15);
+  }
+  50% {
+    border-color: rgba(91, 92, 255, 0.5);
+  }
+}
+
+.glow-border-active {
+  animation: border-glow 4s infinite ease-in-out;
+  box-shadow: 0 0 25px rgba(124, 92, 255, 0.25);
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s infinite ease-in-out;
+}
+
+/* Pulse energy flow */
+@keyframes pulse-energy {
+  0%, 100% {
+    opacity: 0.3;
+    filter: drop-shadow(0 0 2px rgba(124, 92, 255, 0.2));
+  }
+  50% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 15px rgba(124, 92, 255, 0.8));
+  }
+}
+
+.energy-line {
+  animation: pulse-energy 3s infinite ease-in-out;
+}
+
