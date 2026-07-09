@@ -132,21 +132,23 @@ export const INDIVIDUAL_VIDEOS: VideoCard[] = [
     duration: "4:15",
     tag: "أتمتة المحتوى",
     thumbnailUrl: "/images/ind-vid-1.webp",
-    videoUrl: "https://www.youtube.com/watch?v=yYmI_9n0Wno" // Example live YouTube AI demo
+    videoUrl: "https://www.image2url.com/r2/default/videos/1783640216676-afb1f0d1-c9b7-46a2-9184-e198e869039a.mp4"
   },
   {
     id: "ind-vid-2",
     title: "كيف توفر 30 ساعة أسبوعياً بمساعدك الشخصي؟",
     duration: "3:40",
     tag: "الإنتاجية الشخصية",
-    thumbnailUrl: "/images/ind-vid-2.webp"
+    thumbnailUrl: "/images/ind-vid-2.webp",
+    videoUrl: "https://www.image2url.com/r2/default/videos/1783639925690-8a6a5e06-b576-4f70-9609-defc13db5454.mp4"
   },
   {
     id: "ind-vid-3",
     title: "توليد تصاميم المنتجات بجودة استوديو تصوير",
     duration: "5:12",
     tag: "التصميم الإبداعي",
-    thumbnailUrl: "/images/ind-vid-3.webp"
+    thumbnailUrl: "/images/ind-vid-3.webp",
+    videoUrl: "https://www.image2url.com/r2/default/videos/1783640024389-d06430da-e15c-49c5-a19b-e9a97c3d3951.mp4"
   }
 ];
 
@@ -156,7 +158,8 @@ export const COMPANY_VIDEOS: VideoCard[] = [
     title: "محاكاة وكلاء الذكاء الاصطناعي في إدارة المبيعات",
     duration: "6:20",
     tag: "وكلاء المبيعات",
-    thumbnailUrl: "/images/com-vid-1.webp"
+    thumbnailUrl: "/images/com-vid-1.webp",
+    videoUrl: "https://www.image2url.com/r2/default/videos/1783639686386-bcf8a1c7-b5ea-4292-86d2-de933657f133.mp4"
   },
   {
     id: "com-vid-2",

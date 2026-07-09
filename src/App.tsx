@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, lazy, Suspense, ChangeEvent, FormEvent } from "react";
 import { 
   Sparkles, 
   Video, 
@@ -32,7 +32,8 @@ import {
 } from "./components/Icons";
 import Navbar from "./components/Navbar";
 import Logo from "./components/Logo";
-import TuwaiqMountain from "./components/TuwaiqMountain";
+
+const TuwaiqMountain = lazy(() => import("./components/TuwaiqMountain"));
 import { INDIVIDUAL_SERVICES, COMPANY_SERVICES, INDIVIDUAL_VIDEOS, COMPANY_VIDEOS, FAQS } from "./data";
 import { UserType, ContactFormData, Service, VideoCard } from "./types";
 
@@ -419,7 +420,13 @@ export default function App() {
 
             {/* Right Side: Iconic 3D Tuwaiq Mountain */}
             <div className="lg:col-span-5 relative w-full flex justify-center items-center">
-              <TuwaiqMountain />
+              <Suspense fallback={
+                <div className="w-full aspect-[4/3] rounded-3xl bg-[#050816]/50 animate-pulse border border-white/5 flex items-center justify-center text-xs text-[#AEB7CC]">
+                  جاري التحميل...
+                </div>
+              }>
+                <TuwaiqMountain />
+              </Suspense>
             </div>
 
           </div>
@@ -701,7 +708,7 @@ export default function App() {
                           onFocus={() => setFormFocused(prev => ({ ...prev, fullName: true }))}
                           onBlur={() => setFormFocused(prev => ({ ...prev, fullName: false }))}
                           onChange={handleInputChange}
-                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-sm outline-none transition-all font-sans text-right"
+                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-base md:text-sm outline-none transition-all font-sans text-right"
                         />
                       </div>
 
@@ -719,7 +726,7 @@ export default function App() {
                           onFocus={() => setFormFocused(prev => ({ ...prev, companyName: true }))}
                           onBlur={() => setFormFocused(prev => ({ ...prev, companyName: false }))}
                           onChange={handleInputChange}
-                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-sm outline-none transition-all font-sans text-right"
+                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-base md:text-sm outline-none transition-all font-sans text-right"
                         />
                       </div>
 
@@ -743,7 +750,7 @@ export default function App() {
                           onFocus={() => setFormFocused(prev => ({ ...prev, phone: true }))}
                           onBlur={() => setFormFocused(prev => ({ ...prev, phone: false }))}
                           onChange={handleInputChange}
-                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-sm outline-none transition-all font-sans text-left"
+                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-base md:text-sm outline-none transition-all font-sans text-left"
                           dir="ltr"
                         />
                       </div>
@@ -763,7 +770,7 @@ export default function App() {
                           onFocus={() => setFormFocused(prev => ({ ...prev, email: true }))}
                           onBlur={() => setFormFocused(prev => ({ ...prev, email: false }))}
                           onChange={handleInputChange}
-                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-sm outline-none transition-all font-sans text-left"
+                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-base md:text-sm outline-none transition-all font-sans text-left"
                           dir="ltr"
                         />
                       </div>
@@ -784,7 +791,7 @@ export default function App() {
                             handleInputChange(e);
                             handleTabChange(e.target.value as UserType);
                           }}
-                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-sm outline-none transition-all font-sans text-right appearance-none cursor-pointer"
+                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-base md:text-sm outline-none transition-all font-sans text-right appearance-none cursor-pointer"
                         >
                           <option value="individuals" className="bg-[#0B1120]">فرد (صانع محتوى / مستقل)</option>
                           <option value="companies" className="bg-[#0B1120]">شركة / متجر / مؤسسة</option>
@@ -803,7 +810,7 @@ export default function App() {
                           name="serviceNeeded"
                           value={formData.serviceNeeded}
                           onChange={handleInputChange}
-                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-sm outline-none transition-all font-sans text-right appearance-none cursor-pointer"
+                          className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-base md:text-sm outline-none transition-all font-sans text-right appearance-none cursor-pointer"
                         >
                           {currentServices.map((service) => (
                             <option key={service.id} value={service.title} className="bg-[#0B1120]">
@@ -834,7 +841,7 @@ export default function App() {
                         onFocus={() => setFormFocused(prev => ({ ...prev, message: true }))}
                         onBlur={() => setFormFocused(prev => ({ ...prev, message: false }))}
                         onChange={handleInputChange}
-                        className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-sm outline-none transition-all font-sans text-right resize-none"
+                        className="w-full bg-[#050816]/40 border border-white/5 focus:border-[#5B5CFF] focus:ring-1 focus:ring-[#5B5CFF] rounded-xl px-4 py-3.5 text-white text-base md:text-sm outline-none transition-all font-sans text-right resize-none"
                       />
                     </div>
 
