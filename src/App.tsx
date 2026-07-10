@@ -599,15 +599,8 @@ export default function App() {
                         </div>
                       </div>
 
-                      {/* Video duration watermark */}
-                      <div className="absolute bottom-4 left-4">
-                        <span className="font-mono text-xs text-[#AEB7CC] bg-[#050816]/70 px-2 py-0.5 rounded border border-white/5">
-                          {video.duration}
-                        </span>
-                      </div>
-
                       {/* Video Title */}
-                      <div className="absolute bottom-4 right-4 left-16 text-right">
+                      <div className="absolute bottom-4 right-4 left-4 text-right">
                         <h4 className="font-sans text-sm sm:text-base font-bold text-white leading-snug group-hover:text-[#3B82F6] transition-colors">
                           {video.title}
                         </h4>

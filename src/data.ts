@@ -166,14 +166,16 @@ export const COMPANY_VIDEOS: VideoCard[] = [
     title: "ربط متجر سلة بنظام إدارة المستودعات والـ ERP",
     duration: "5:05",
     tag: "أتمتة التجارة الإلكترونية",
-    thumbnailUrl: "/images/com-vid-2.webp"
+    thumbnailUrl: "/images/com-vid-2.webp",
+    videoUrl: "https://www.image2url.com/r2/default/videos/1783641987223-e9e55b71-8425-40ac-8f00-d6f51b6b747b.mp4"
   },
   {
     id: "com-vid-3",
     title: "استعراض الشات بوت العربي وفهم اللهجة السعودية",
     duration: "4:45",
     tag: "خدمة العملاء الذكية",
-    thumbnailUrl: "/images/com-vid-3.webp"
+    thumbnailUrl: "/images/com-vid-3.webp",
+    videoUrl: "https://www.image2url.com/r2/default/videos/1783641888223-6122cd9f-3ef5-4b12-b73b-039a3ed1eea3.mp4"
   }
 ];
 
