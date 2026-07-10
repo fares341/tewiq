@@ -86,6 +86,51 @@ export default function App() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Protect the website by disabling Right Click, F12, and DevTools keyboard shortcuts
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // 1. Prevent Right Click context menu
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    // 2. Prevent keyboard shortcuts for Inspect Element and DevTools
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Prevent F12
+      if (e.key === "F12" || e.keyCode === 123) {
+        e.preventDefault();
+        return;
+      }
+
+      // Prevent Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+      if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c")) {
+        e.preventDefault();
+        return;
+      }
+
+      // Prevent Ctrl+U (View Source)
+      if (e.ctrlKey && (e.key === "U" || e.key === "u")) {
+        e.preventDefault();
+        return;
+      }
+
+      // Prevent Cmd+Opt+I, Cmd+Opt+J, Cmd+Opt+C, Cmd+Opt+U on Mac
+      if (e.metaKey && e.altKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c" || e.key === "U" || e.key === "u")) {
+        e.preventDefault();
+        return;
+      }
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   // Contact Form States
   const [formData, setFormData] = useState<ContactFormData>({
     fullName: "",
